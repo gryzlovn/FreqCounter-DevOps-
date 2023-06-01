@@ -1,5 +1,4 @@
-name: Build
-
+name: Build java 
 on:
   push:
     branches:
@@ -9,35 +8,22 @@ on:
       - 'master'
 
 jobs:
-
+#Build for Windows
   build_win:
     runs-on: windows-latest
     steps:
-      #       checkout
+      #CheckOut
       - uses: actions/checkout@v1
       - name: set up JDK 11
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
-  build_ubunta:
-    runs-on: ubuntu-latest
-    steps:
-      #       checkout
-      - uses: actions/checkout@v1
-      - name: set up JDK 11
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.11
-
-      #       build project and run all tests & checks
-      - name: Maven Verify
+          
+      #Maven App Building
+      - name: Maven Building
         run: mvn -B clean verify
-      - name: Upload Maven build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: artifact.jar
-          path: untitled6/artifacts.jar
-      - name: Upload Maven build artifact
+        
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: artifact.jar
